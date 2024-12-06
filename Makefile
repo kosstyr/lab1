@@ -7,7 +7,7 @@ SRC_DIR = src
 BIN_DIR = bin
 
 # Имя исполняемого файла
-TARGET = $(BIN_DIR)/helloworld
+TARGET = $(BIN_DIR)/lab1
 
 # Исходные и объектные файлы
 SRCS = $(wildcard $(SRC_DIR)/*.c)
