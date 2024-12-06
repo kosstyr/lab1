@@ -1,13 +1,9 @@
+//включить хедер только один раз
+#pragma once
+
+#include "calculate.h"
+#include "validate.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
 
 void printResult(int* results, int size);
 
-int calculate(char* aChar, char* operation, char* bChar);
-
-int validateInput(int argc, char** argv);
-
-int isNumber(char* potentialNumber);
-int isCharacterInString(char operation, char* potentialOperations);
