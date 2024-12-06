@@ -10,3 +10,4 @@ int calculate(char* aChar, char* operation, char* bChar);
 int validateInput(int argc, char** argv);
 
 int isNumber(char* potentialNumber);
+int isCharacterInString(char operation, char* potentialOperations);

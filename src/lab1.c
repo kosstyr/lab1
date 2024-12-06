@@ -9,12 +9,8 @@ int main(int argc, char **argv) {
 
     int results[argc / 3];
     int key = atoi(argv[argc - 1]);
-    for (int i = 1; argc; i += 3)
+    for (int i = 1; i < argc - 2; i += 3)
     {
-        if (i == argc - 2)
-        {
-            break;
-        }
         //printf("%s %s %s\n", argv[i], argv[i + 1], argv[i + 2]);
         int result = calculate(argv[i], argv[i + 1], argv[i + 2]);
         printf("Ответ №%d: %d\n", (i / 3) + 1, result);
@@ -52,13 +48,15 @@ int validateInput(int argc, char** argv)
     }
 
 
-    for (int i = 1; argc; i += 3)
+    for (int i = 1; i < argc - 2; i += 3)
     {
-        if (i == argc - 2)
+        if ((strcmp(argv[i + 1], "%") == 0) && (strcmp(argv[i + 2], "0") == 0))
         {
+            printf("Не пройдена проверка: деление на 0.\n");
+            code = 1;
             break;
         }
-        if (!isNumber(argv[i]) || !isNumber(argv[i + 2]) || !isCharacterInString(argv[i + 1], "+-*%"))
+        else if (!isNumber(argv[i]) || !isNumber(argv[i + 2]) || !isCharacterInString(argv[i + 1][0], "+-*%"))
         {
             printf("Не пройдена проверка: первый и третий аргумент в парах - числа, средний - поддерживаемая операция.\n");
             code = 1;
@@ -75,11 +73,19 @@ int validateInput(int argc, char** argv)
 
 int isCharacterInString(char operation, char* potentialOperations)
 {
-    return strchr(potentialOperation, operation) != NULL;
+    if (strchr(potentialOperations, operation) != NULL)
+    {
+        return 1;
+    }
+    return 0;
 }
 
 int isNumber(char* potentialNumber)
 {
+    if (*potentialNumber == '-')
+    {
+        potentialNumber++;
+    }
     while (*potentialNumber) {
         if (!isdigit(*potentialNumber)) {
             return 0;
