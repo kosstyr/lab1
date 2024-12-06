@@ -11,6 +11,18 @@ int calculate(char* aChar, char* operation, char* bChar)
     {
         return a + b;
     }
+    else if (strcmp(operation, "-") == 0)
+    {
+        return a - b;
+    }
+    else if (strcmp(operation, "*") == 0)
+    {
+        return a * b;
+    }
+    else if (strcmp(operation, "%") == 0)
+    {
+        return a % b;
+    }
     return -1;
 }
 
@@ -21,6 +33,8 @@ int main(int argc, char **argv) {
         return 0;
     }
 
+    int results[argc / 3];
+    int key = atoi(argv[argc - 1]);
     for (int i = 1; argc; i += 3)
     {
         if (i == argc - 2)
@@ -28,8 +42,18 @@ int main(int argc, char **argv) {
             break;
         }
         //printf("%s %s %s\n", argv[i], argv[i + 1], argv[i + 2]);
-        printf("%d\n", calculate(argv[i], argv[i + 1], argv[i + 2]));
+        int result = calculate(argv[i], argv[i + 1], argv[i + 2]);
+        results[i / 3] = result - key;
+        printf("Ответ №%d: %d\n", (i / 3) + 1, result);
     }
+
+    printf("Результирующая строка: ");
+    for (int i = 0; i < (argc / 3); ++i)
+    {
+        printf("%c", results[i]);
+    }
+    printf("\n");
+
     return 0;
 }
 
